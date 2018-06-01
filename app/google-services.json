@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "1068765499593",
+    "firebase_url": "https://tpdmproyectofinal.firebaseio.com",
+    "project_id": "tpdmproyectofinal",
+    "storage_bucket": "tpdmproyectofinal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1068765499593:android:ac237dd9c892ea05",
+        "android_client_info": {
+          "package_name": "mx.edu.ittepic.tpdm_proyectofinal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1068765499593-pl3cfi952dm8c6a90f1jt6i12h68bum2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mx.edu.ittepic.tpdm_proyectofinal",
+            "certificate_hash": "3fdd19982306a9dfa4b51512e99613ee2048597d"
+          }
+        },
+        {
+          "client_id": "1068765499593-i1dcrn3d5kao010alvj1b1d2m7qojn44.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "1068765499593-i1dcrn3d5kao010alvj1b1d2m7qojn44.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9OTQctMwBIlmoxcY6KqE5qoZOAU45gF4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1068765499593-i1dcrn3d5kao010alvj1b1d2m7qojn44.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
