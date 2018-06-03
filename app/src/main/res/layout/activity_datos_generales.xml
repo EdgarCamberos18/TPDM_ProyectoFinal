@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DatosGenerales"
+    android:orientation="vertical"
+    android:layout_margin="30dp">
+
+    <include layout="@layout/datos_generales"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/registrar_datos"
+            android:id="@+id/registrar"
+            android:layout_marginEnd="10sp"
+            android:layout_marginRight="10sp" />
+
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="@string/cancelar"
+            android:id="@+id/cancelar"
+            android:layout_marginStart="10sp"
+            android:layout_marginLeft="10sp" />
+    </LinearLayout>
+</LinearLayout>
