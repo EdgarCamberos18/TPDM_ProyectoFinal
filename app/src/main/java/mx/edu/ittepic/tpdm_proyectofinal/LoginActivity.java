@@ -16,6 +16,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Iterator;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -23,6 +31,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authStateListener;
     private EditText password, email;
+    String usuario;
+    boolean emailV = false;
+    private final DatabaseReference DATABASE = FirebaseDatabase.getInstance().getReference();;
 
 
 
@@ -48,9 +59,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user !=null){
-                    Toast.makeText(getApplicationContext(), "Inicio Sesion", Toast.LENGTH_SHORT).show();
+
+                if(user!=null) {
+                    if (user.isEmailVerified() && user.getUid() != null) {
+                        emailV=user.isEmailVerified();
+                        usuario = user.getUid();
+                        if (usuariosCliente != null)
+                            for (String usr : usuariosCliente) {
+                                if (usr.equals(usuario)) {
+                                    startActivity(new Intent(getApplicationContext(), ClienteActivity.class));
+                                    return;
+                                }
+                            }
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(),"CORREO NO VERIFICADO",Toast.LENGTH_SHORT);
+                    }
                 }
+
+
             }
         };
 
@@ -72,12 +99,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             case R.id.provando:
                 Connection a = new Connection();
-                a.addNewBabySister("12","a","a","a","a",12,"as",1,"as");
+
+                boolean s= a.verificarUsuariosPendientes(usuario);
+                int k=0;
                 break;
         }
     }
 
     private void ingresar() {
+
         String email = this.email.getText().toString().trim();
         String password = this.password.getText().toString().trim();
 
@@ -104,23 +134,107 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if(!task.isSuccessful()){
                     Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
+                else {
+                    if (emailV) {
+                        if (usuariosCliente != null) {
+                            for (String usr : usuariosCliente) {
+                                if (usr.equals(usuario)) {
+                                    startActivity(new Intent(getApplicationContext(), ClienteActivity.class));
+                                    return;
+                                }
+                            }
+                        }
+                        if (babysister != null) {
+                            for (String usr : babysister) {
+                                if (usr.equals(usuario)) {
+                                    startActivity(new Intent(getApplicationContext(), BabySisterActivity.class));
+                                    return;
+                                }
+                            }
+                        }
+
+                        startActivity(new Intent(getApplicationContext(), AdminActivity.class));
+                    }
+                    else
+                        Toast.makeText(getApplicationContext(),"El email no ha sido verificado aun",Toast.LENGTH_SHORT).show();
+
+                }
             }
         });
     }
 
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        auth.addAuthStateListener(authStateListener);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        auth.addAuthStateListener(authStateListener);
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
         if(authStateListener!=null){
-            auth.addAuthStateListener(authStateListener);
+            auth.removeAuthStateListener(authStateListener);
         }
     }
+
+    int tipoCliente =  0;
+    String usuariosCliente [];
+    String babysister[];
 
     @Override
     protected void onStart() {
         super.onStart();
         auth.addAuthStateListener(authStateListener);
+        DATABASE.child("Cliente").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Map<String,String> data = (Map<String, String>) dataSnapshot.getValue();
+                if(data!=null){
+                    String usr="";
+                    Iterator it = data.entrySet().iterator();
+                    while (it.hasNext()) {
+                        Map.Entry e = (Map.Entry) it.next();
+                        usr+=e.getKey().toString()+",";
+
+                        usuariosCliente = usr.split(",");
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        DATABASE.child("BabySister").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Map<String,String> data = (Map<String, String>) dataSnapshot.getValue();
+                if(data!=null){
+                    String usr="";
+                    Iterator it = data.entrySet().iterator();
+                    while (it.hasNext()) {
+                        Map.Entry e = (Map.Entry) it.next();
+                        usr+=e.getKey().toString()+",";
+
+                        babysister = usr.split(",");
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
 

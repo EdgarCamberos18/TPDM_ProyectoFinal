@@ -19,7 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUpActivity"></activity>
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".AdminActivity" />
+        <activity android:name=".BabySisterActivity" />
+        <activity android:name=".ClienteActivity"></activity>
     </application>
 
 </manifest>

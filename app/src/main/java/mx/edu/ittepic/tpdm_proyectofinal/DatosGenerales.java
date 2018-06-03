@@ -31,7 +31,7 @@ public class DatosGenerales extends AppCompatActivity {
 		apellidoM           = findViewById(R.id.apellidoM);
 		direccion           = findViewById(R.id.direccion);
 		edad                = findViewById(R.id.edad);
-		contrasena          = findViewById(R.id.contrasena);
+
 
 		registrar.setOnClickListener(new View.OnClickListener() {
 			@Override
