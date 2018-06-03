@@ -164,26 +164,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        auth.addAuthStateListener(authStateListener);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        auth.addAuthStateListener(authStateListener);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if(authStateListener!=null){
-            auth.removeAuthStateListener(authStateListener);
-        }
-    }
-
     int tipoCliente =  0;
     String usuariosCliente [];
     String babysister[];
@@ -235,6 +215,44 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             }
         });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        auth.addAuthStateListener(authStateListener);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        auth.addAuthStateListener(authStateListener);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        auth.addAuthStateListener(authStateListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(authStateListener!=null){
+            auth.removeAuthStateListener(authStateListener);
+        }
     }
 
 
