@@ -26,7 +26,8 @@
         <activity android:name=".BabySisterActivity" />
         <activity android:name=".ClienteActivity" />
         <activity android:name=".DatosGeneralesBS" />
-        <activity android:name=".ProximosEventosBS"></activity>
+        <activity android:name=".ProximosEventosBS" />
+        <activity android:name=".ServiciosActivity"></activity>
     </application>
 
 </manifest>

@@ -132,14 +132,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
 
         if(celular.getText().toString().isEmpty()){
-            celular.setError("Please enter a valid email");
+            celular.setError("Please enter your cell");
             celular.requestFocus();
             return;
         }
 
 
         if(edad.getText().toString().isEmpty()){
-            edad.setError("Please enter a valid email");
+            edad.setError("Please enter your birthdate");
             edad.requestFocus();
             return;
         }
@@ -162,6 +162,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         if(contrasena.equals(contrasenaV))
             mAuth.createUserWithEmailAndPassword(correo, contrasena).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
@@ -184,6 +185,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
                     }
                 }
+
             });
         else {
             passwordV.setError("Your password it does not match");

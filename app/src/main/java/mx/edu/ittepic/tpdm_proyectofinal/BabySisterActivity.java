@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -35,6 +36,7 @@ public class BabySisterActivity extends AppCompatActivity implements View.OnClic
     private String usuario;
     private final DatabaseReference DATABASE = FirebaseDatabase.getInstance().getReference();
     private Button datosGenerales,proximosEvent,historial;
+    private TextView nombreN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class BabySisterActivity extends AppCompatActivity implements View.OnClic
         mStorage = FirebaseStorage.getInstance().getReference();
         foto = findViewById(R.id.foto);
         datosGenerales = findViewById(R.id.datosGenerales);
+        nombreN = findViewById(R.id.nombreN);
         historial = findViewById(R.id.historial);
         proximosEvent = findViewById(R.id.programarEventos);
 
@@ -70,13 +73,12 @@ public class BabySisterActivity extends AppCompatActivity implements View.OnClic
                 Intent i = new Intent (getApplicationContext(), DatosGeneralesBS.class);
                 datosgenerales[7]=usuario;
                 i.putExtra("datos", datosgenerales);
-
                 startActivity(i);
                 break;
             case R.id.programarEventos:
-                /*Intent intent2 = new Intent(Intent.ACTION_PICK);
-                intent2.setType("image/*");
-                startActivityForResult(intent,GALERY_INTENT);*/
+                Intent it = new Intent (getApplicationContext(), ServiciosActivity.class);
+                it.putExtra("usuario", usuario);
+                startActivity(it);
                 break;
             case R.id.historial:
                 /*Intent intent3 = new Intent(Intent.ACTION_PICK);
@@ -164,7 +166,7 @@ public class BabySisterActivity extends AppCompatActivity implements View.OnClic
             }
         });
 
-        DATABASE.child("BabySister").child(usuario).child("DatosGenerales").child("FehcaNacimiento").addValueEventListener(new ValueEventListener() {
+        DATABASE.child("BabySister").child(usuario).child("DatosGenerales").child("FechaNacimiento").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 datosgenerales[3]=dataSnapshot.getValue().toString();
@@ -212,7 +214,24 @@ public class BabySisterActivity extends AppCompatActivity implements View.OnClic
             }
         });
 
+        DATABASE.child("BabySister").child(usuario).child("DatosGenerales").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                nombreN.setText(dataSnapshot.child("Nombre").getValue().toString()+" "+dataSnapshot.child("ApellidoPaterno").getValue().toString()+" "+dataSnapshot.child("ApellidoMaterno").getValue().toString());
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+    }
+
+
+    private void getServicio(){
 
     }
 }

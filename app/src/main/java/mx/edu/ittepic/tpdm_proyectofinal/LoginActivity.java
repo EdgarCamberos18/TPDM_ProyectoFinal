@@ -22,7 +22,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -43,15 +42,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getDatos();
-
         password = findViewById(R.id.password);
         email = findViewById(R.id.email);
 
         registrar=findViewById(R.id.registrar);
         registrar.setOnClickListener(this);
-
-
 
         login=findViewById(R.id.login);
         login.setOnClickListener(this);
@@ -61,25 +56,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-
-                if(user!=null) {
-                    if (user.isEmailVerified() && user.getUid() != null) {
-                        emailV=user.isEmailVerified();
-                        usuario = user.getUid();
-                        if (usuariosCliente != null)
-                            for (String usr : usuariosCliente) {
-                                if (usr.equals(usuario)) {
-                                    startActivity(new Intent(getApplicationContext(), ClienteActivity.class));
-                                    return;
-                                }
-                            }
-                    }
-                    else {
-                        Toast.makeText(getApplicationContext(),"CORREO NO VERIFICADO",Toast.LENGTH_SHORT);
-                    }
-                }
-
-
+                usuario = user.getUid();
+                emailV = user.isEmailVerified();
             }
         };
 
@@ -155,7 +133,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             }
                         }
                         Intent i = new Intent (getApplicationContext(), AdminActivity.class);
-                        i.putExtra("nombresBs", nombresBs);
+                        i.putExtra("usuario", usuario);
                         startActivity(i);
                         //startActivity(new Intent(getApplicationContext(), AdminActivity.class));
                     }
@@ -227,36 +205,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-    ArrayList <String> nombresBs =new ArrayList<String>();
-    public void getDatos(){
-        DATABASE.child("BabySister").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Map<String,String> data = (Map<String, String>) dataSnapshot.getValue();
-                if(data!=null){
-                    String usr="";
-                    Iterator it = data.entrySet().iterator();
-                    while (it.hasNext()) {
-                        Map.Entry e = (Map.Entry) it.next();
-                        usr+=e.getKey().toString()+",";
 
 
-                    }
-                    babysister = usr.split(",");
-                }
-
-                for(int i=0;i<babysister.length;i++){
-                    nombresBs.add(dataSnapshot.child(babysister[i]).child("DatosGenerales").child("Nombre").getValue().toString()+" "+dataSnapshot.child(babysister[i]).child("DatosGenerales").child("ApellidoPaterno").getValue().toString()+" "+dataSnapshot.child(babysister[i]).child("DatosGenerales").child("ApellidoMaterno").getValue().toString());
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
 
 
 
