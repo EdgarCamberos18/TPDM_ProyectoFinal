@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText password, email;
     String usuario;
     boolean emailV = false;
-    private final DatabaseReference DATABASE = FirebaseDatabase.getInstance().getReference();;
+    private final DatabaseReference DATABASE = FirebaseDatabase.getInstance().getReference();
 
 
 
@@ -139,7 +139,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (usuariosCliente != null) {
                             for (String usr : usuariosCliente) {
                                 if (usr.equals(usuario)) {
-                                    startActivity(new Intent(getApplicationContext(), ClienteActivity.class));
+                                    Intent i = new Intent (getApplicationContext(), ClienteActivity.class);
+                                    i.putExtra("usuario", usuario);
+                                    startActivity(i);
+                                    //startActivity(new Intent(getApplicationContext(), ClienteActivity.class));
                                     return;
                                 }
                             }
@@ -147,15 +150,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (babysister != null) {
                             for (String usr : babysister) {
                                 if (usr.equals(usuario)) {
-                                    startActivity(new Intent(getApplicationContext(), BabySisterActivity.class));
+                                    Intent i = new Intent (getApplicationContext(), BabySisterActivity.class);
+                                    i.putExtra("usuario", usuario);
+                                    startActivity(i);
+                                    //startActivity(new Intent(getApplicationContext(), BabySisterActivity.class));
                                     return;
                                 }
                             }
                         }
-
-                        startActivity(new Intent(getApplicationContext(), AdminActivity.class));
+                        Intent i = new Intent (getApplicationContext(), AdminActivity.class);
+                        i.putExtra("usuario", usuario);
+                        startActivity(i);
+                        //startActivity(new Intent(getApplicationContext(), AdminActivity.class));
                     }
                     else
+
                         Toast.makeText(getApplicationContext(),"El email no ha sido verificado aun",Toast.LENGTH_SHORT).show();
 
                 }

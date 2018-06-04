@@ -34,6 +34,10 @@ public class Connection {
 
     }
 
+    protected void addPhoto(String usuario,String filePathPotho,String typeUser){
+        DATABASE.child(typeUser).child(usuario).child("Photo").setValue(filePathPotho);
+    }
+
     protected void searchUser(final String numCell){
 
 
