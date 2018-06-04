@@ -27,7 +27,7 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button registrar,login,provando;
+    private Button registrar,login;
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authStateListener;
     private EditText password, email;
@@ -41,9 +41,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        provando = findViewById(R.id.provando);
-        provando.setOnClickListener(this);
 
         password = findViewById(R.id.password);
         email = findViewById(R.id.email);
@@ -97,12 +94,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 ingresar();
                 break;
 
-            case R.id.provando:
-                Connection a = new Connection();
-
-                boolean s= a.verificarUsuariosPendientes(usuario);
-                int k=0;
-                break;
         }
     }
 

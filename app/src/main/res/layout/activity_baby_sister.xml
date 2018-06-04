@@ -31,7 +31,10 @@
         android:layout_marginTop="30dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:paddingHorizontal="50dp"/>
+        android:paddingHorizontal="50dp"
+        android:id="@+id/datosGenerales"/>
+
+
 
     <Button
         android:layout_width="wrap_content"
@@ -40,7 +43,8 @@
         android:text="Proximos Eventos"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:paddingHorizontal="50dp"/>
+        android:paddingHorizontal="50dp"
+        android:id="@+id/programarEventos"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -49,7 +53,8 @@
         android:text="Historial Eventos"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:paddingHorizontal="50dp"/>
+        android:paddingHorizontal="50dp"
+        android:id="@+id/historial"/>
 
 
 </LinearLayout>

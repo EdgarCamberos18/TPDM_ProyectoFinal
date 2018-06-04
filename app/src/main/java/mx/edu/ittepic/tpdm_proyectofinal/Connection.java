@@ -31,6 +31,7 @@ public class Connection {
         DATABASE.child(type).child(userU).child("DatosGenerales").child("FehcaNacimiento").setValue(fechaNacimineto);
         DATABASE.child(type).child(userU).child("DatosGenerales").child("Sexo").setValue(sexo);
         DATABASE.child(type).child(userU).child("DatosGenerales").child("NumeroCelular").setValue(numeroCelular);
+        DATABASE.child(type).child(userU).child("DatosGenerales").child("Estatus").setValue("Activo");
 
     }
 
