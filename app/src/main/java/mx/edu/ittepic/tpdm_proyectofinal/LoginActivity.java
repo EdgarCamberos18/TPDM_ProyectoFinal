@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -42,11 +43,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getDatos();
+
         password = findViewById(R.id.password);
         email = findViewById(R.id.email);
 
         registrar=findViewById(R.id.registrar);
         registrar.setOnClickListener(this);
+
+
 
         login=findViewById(R.id.login);
         login.setOnClickListener(this);
@@ -150,7 +155,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             }
                         }
                         Intent i = new Intent (getApplicationContext(), AdminActivity.class);
-                        i.putExtra("usuario", usuario);
+                        i.putExtra("nombresBs", nombresBs);
                         startActivity(i);
                         //startActivity(new Intent(getApplicationContext(), AdminActivity.class));
                     }
@@ -167,6 +172,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     int tipoCliente =  0;
     String usuariosCliente [];
     String babysister[];
+    String datosgenerales[];
 
     @Override
     protected void onStart() {
@@ -215,9 +221,42 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             }
         });
+
+
+
+
     }
 
+    ArrayList <String> nombresBs =new ArrayList<String>();
+    public void getDatos(){
+        DATABASE.child("BabySister").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Map<String,String> data = (Map<String, String>) dataSnapshot.getValue();
+                if(data!=null){
+                    String usr="";
+                    Iterator it = data.entrySet().iterator();
+                    while (it.hasNext()) {
+                        Map.Entry e = (Map.Entry) it.next();
+                        usr+=e.getKey().toString()+",";
 
+
+                    }
+                    babysister = usr.split(",");
+                }
+
+                for(int i=0;i<babysister.length;i++){
+                    nombresBs.add(dataSnapshot.child(babysister[i]).child("DatosGenerales").child("Nombre").getValue().toString()+" "+dataSnapshot.child(babysister[i]).child("DatosGenerales").child("ApellidoPaterno").getValue().toString()+" "+dataSnapshot.child(babysister[i]).child("DatosGenerales").child("ApellidoMaterno").getValue().toString());
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
 
 
 
