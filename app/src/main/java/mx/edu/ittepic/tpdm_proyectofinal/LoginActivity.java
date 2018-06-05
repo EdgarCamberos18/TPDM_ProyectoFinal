@@ -27,13 +27,13 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button registrar,login,provando;
+    private Button registrar,login;
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authStateListener;
     private EditText password, email;
     String usuario;
     boolean emailV = false;
-    private final DatabaseReference DATABASE = FirebaseDatabase.getInstance().getReference();;
+    private final DatabaseReference DATABASE = FirebaseDatabase.getInstance().getReference();
 
 
 
@@ -41,9 +41,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        provando = findViewById(R.id.provando);
-        provando.setOnClickListener(this);
 
         password = findViewById(R.id.password);
         email = findViewById(R.id.email);
@@ -59,25 +56,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-
-                if(user!=null) {
-                    if (user.isEmailVerified() && user.getUid() != null) {
-                        emailV=user.isEmailVerified();
-                        usuario = user.getUid();
-                        if (usuariosCliente != null)
-                            for (String usr : usuariosCliente) {
-                                if (usr.equals(usuario)) {
-                                    startActivity(new Intent(getApplicationContext(), ClienteActivity.class));
-                                    return;
-                                }
-                            }
-                    }
-                    else {
-                        Toast.makeText(getApplicationContext(),"CORREO NO VERIFICADO",Toast.LENGTH_SHORT);
-                    }
-                }
-
-
+                usuario = user.getUid();
+                emailV = user.isEmailVerified();
             }
         };
 
@@ -97,12 +77,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 ingresar();
                 break;
 
-            case R.id.provando:
-                Connection a = new Connection();
-
-                boolean s= a.verificarUsuariosPendientes(usuario);
-                int k=0;
-                break;
         }
     }
 
@@ -139,7 +113,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (usuariosCliente != null) {
                             for (String usr : usuariosCliente) {
                                 if (usr.equals(usuario)) {
-                                    startActivity(new Intent(getApplicationContext(), ClienteActivity.class));
+                                    Intent i = new Intent (getApplicationContext(), ClienteActivity.class);
+                                    i.putExtra("usuario", usuario);
+                                    startActivity(i);
+                                    //startActivity(new Intent(getApplicationContext(), ClienteActivity.class));
                                     return;
                                 }
                             }
@@ -147,15 +124,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (babysister != null) {
                             for (String usr : babysister) {
                                 if (usr.equals(usuario)) {
-                                    startActivity(new Intent(getApplicationContext(), BabySisterActivity.class));
+                                    Intent i = new Intent (getApplicationContext(), BabySisterActivity.class);
+                                    i.putExtra("usuario", usuario);
+                                    startActivity(i);
+                                    //startActivity(new Intent(getApplicationContext(), BabySisterActivity.class));
                                     return;
                                 }
                             }
                         }
-
-                        startActivity(new Intent(getApplicationContext(), AdminActivity.class));
+                        Intent i = new Intent (getApplicationContext(), AdminActivity.class);
+                        i.putExtra("usuario", usuario);
+                        startActivity(i);
+                        //startActivity(new Intent(getApplicationContext(), AdminActivity.class));
                     }
                     else
+
                         Toast.makeText(getApplicationContext(),"El email no ha sido verificado aun",Toast.LENGTH_SHORT).show();
 
                 }
@@ -167,6 +150,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     int tipoCliente =  0;
     String usuariosCliente [];
     String babysister[];
+    String datosgenerales[];
 
     @Override
     protected void onStart() {
@@ -215,7 +199,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             }
         });
+
+
+
+
     }
+
 
 
 

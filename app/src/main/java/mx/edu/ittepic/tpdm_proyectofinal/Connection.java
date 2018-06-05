@@ -28,10 +28,15 @@ public class Connection {
         DATABASE.child(type).child(userU).child("DatosGenerales").child("ApellidoPaterno").setValue(appellidoPaterno);
         DATABASE.child(type).child(userU).child("DatosGenerales").child("ApellidoMaterno").setValue(apellidoMaterno);
         DATABASE.child(type).child(userU).child("DatosGenerales").child("Domicilio").setValue(domicilio);
-        DATABASE.child(type).child(userU).child("DatosGenerales").child("FehcaNacimiento").setValue(fechaNacimineto);
+        DATABASE.child(type).child(userU).child("DatosGenerales").child("FechaNacimiento").setValue(fechaNacimineto);
         DATABASE.child(type).child(userU).child("DatosGenerales").child("Sexo").setValue(sexo);
         DATABASE.child(type).child(userU).child("DatosGenerales").child("NumeroCelular").setValue(numeroCelular);
+        DATABASE.child(type).child(userU).child("DatosGenerales").child("Estatus").setValue("Activo");
 
+    }
+
+    protected void addPhoto(String usuario,String filePathPotho,String typeUser){
+        DATABASE.child(typeUser).child(usuario).child("Photo").setValue(filePathPotho);
     }
 
     protected void searchUser(final String numCell){

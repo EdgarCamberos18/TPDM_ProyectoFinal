@@ -43,12 +43,6 @@
         android:text="Sign Up"
         android:id="@+id/registrar"/>
 
-    <Button
-        android:layout_marginTop="30dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Provando"
-        android:id="@+id/provando"/>
+
 
 </LinearLayout>

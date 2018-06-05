@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:text="Nombre Niñera"
         android:textSize="20sp"
+        android:id="@+id/nombreN"
         android:layout_gravity="center_horizontal"/>
 
     <Button
@@ -31,7 +32,8 @@
         android:layout_marginTop="30dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:paddingHorizontal="50dp"/>
+        android:paddingHorizontal="50dp"
+        android:id="@+id/datosGenerales"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -40,7 +42,9 @@
         android:text="Proximos Eventos"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:paddingHorizontal="50dp"/>
+        android:paddingHorizontal="50dp"
+        android:id="@+id/programarEventos"
+        android:visibility="invisible"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -49,7 +53,9 @@
         android:text="Historial Eventos"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:paddingHorizontal="50dp"/>
+        android:paddingHorizontal="50dp"
+        android:id="@+id/historial"
+        android:visibility="invisible"/>
 
 
 </LinearLayout>
