@@ -31,7 +31,7 @@ public class AdminActivity extends AppCompatActivity {
 	    verUsuarios.setOnClickListener(new View.OnClickListener() {
 		    @Override
 		    public void onClick(View v) {
-
+			    startActivityForResult(new Intent(AdminActivity.this, ViewUsuariosActivity.class), 0);
 		    }
 	    });
 

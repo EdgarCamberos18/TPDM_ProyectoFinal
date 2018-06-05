@@ -100,7 +100,7 @@ public class BabySisterActivity extends AppCompatActivity implements View.OnClic
             filePath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Uri descargarFoto = taskSnapshot.getDownloadUrl();
+                    Uri descargarFoto = taskSnapshot.getUploadSessionUri();
                     conexion.addPhoto(usuario,descargarFoto.toString(),"BabySister");
                     Toast.makeText(getApplicationContext(),"Foto cargada con exito",Toast.LENGTH_SHORT).show();
                 }

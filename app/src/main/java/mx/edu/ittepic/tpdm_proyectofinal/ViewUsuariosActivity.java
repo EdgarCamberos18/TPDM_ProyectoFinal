@@ -24,24 +24,24 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Objects;
 
 import static android.R.layout.simple_list_item_1;
-public class ViewNinerasActivity extends AppCompatActivity {
+
+public class ViewUsuariosActivity extends AppCompatActivity {
 
 	private FirebaseAuth auth;
 	private FirebaseAuth.AuthStateListener authStateListener;
 	private final DatabaseReference DATABASE = FirebaseDatabase.getInstance().getReference();
-	String babysister[];
+	String Users[];
 	ArrayList<String> list = null;
 	ListView listview;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_view_nineras);
+		setContentView(R.layout.activity_view_usuarios);
+
 		auth = FirebaseAuth.getInstance();
 
 		authStateListener = new FirebaseAuth.AuthStateListener() {
@@ -49,15 +49,12 @@ public class ViewNinerasActivity extends AppCompatActivity {
 			public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 				FirebaseUser user = firebaseAuth.getCurrentUser();
 
-				if(user!=null) {
-					if (user.isEmailVerified()) {
+				if(user != null)
+					if (user.isEmailVerified())
 						Log.d("DEBUG", "YEAH");
-					}
-					else {
+					else
 						Toast.makeText(getApplicationContext(),"CORREO NO VERIFICADO",Toast.LENGTH_SHORT).show();
 
-					}
-				}
 			}
 		};
 
@@ -65,7 +62,7 @@ public class ViewNinerasActivity extends AppCompatActivity {
 		cancelar.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ViewNinerasActivity.this.finish();
+				ViewUsuariosActivity.this.finish();
 			}
 		});
 	}
@@ -75,9 +72,9 @@ public class ViewNinerasActivity extends AppCompatActivity {
 		super.onStart();
 
 		auth.addAuthStateListener(this.authStateListener);
-		this.listview = findViewById(R.id.listview_ninera);
+		this.listview = findViewById(R.id.listview_usuario);
 
-		DATABASE.child("BabySister").addValueEventListener(new ValueEventListener() {
+		DATABASE.child("Cliente").addValueEventListener(new ValueEventListener() {
 			@RequiresApi(api = Build.VERSION_CODES.KITKAT)
 			@Override
 			public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
@@ -90,22 +87,22 @@ public class ViewNinerasActivity extends AppCompatActivity {
 						Map.Entry e = (Map.Entry) o;
 						usr.append(e.getKey().toString()).append(",");
 
-						ViewNinerasActivity.this.babysister = usr.toString().split(",");
+						ViewUsuariosActivity.this.Users = usr.toString().split(",");
 					}
 
-					String[] array = new String[ViewNinerasActivity.this.babysister.length];
+					String[] array = new String[ViewUsuariosActivity.this.Users.length];
 
-					for (int i = 0; i < ViewNinerasActivity.this.babysister.length; i++) {
-						array[i] =  dataSnapshot.child(ViewNinerasActivity.this.babysister[i]).child("DatosGenerales").child("Nombre").getValue().toString() + " " +
-									dataSnapshot.child(ViewNinerasActivity.this.babysister[i]).child("DatosGenerales").child("ApellidoPaterno").getValue().toString() + " " +
-									dataSnapshot.child(ViewNinerasActivity.this.babysister[i]).child("DatosGenerales").child("ApellidoMaterno").getValue().toString();
+					for (int i = 0; i < ViewUsuariosActivity.this.Users.length; i++) {
+						array[i] =  dataSnapshot.child(ViewUsuariosActivity.this.Users[i]).child("DatosGenerales").child("Nombre").getValue().toString() + " " +
+								dataSnapshot.child(ViewUsuariosActivity.this.Users[i]).child("DatosGenerales").child("ApellidoPaterno").getValue().toString() + " " +
+								dataSnapshot.child(ViewUsuariosActivity.this.Users[i]).child("DatosGenerales").child("ApellidoMaterno").getValue().toString();
 					}
 
-					ViewNinerasActivity.this.list       = new ArrayList<>(Arrays.asList(array));
-					final ArrayAdapter<String> adapter  = new ArrayAdapter<>(ViewNinerasActivity.this, simple_list_item_1, list);
+					ViewUsuariosActivity.this.list       = new ArrayList<>(Arrays.asList(array));
+					final ArrayAdapter<String> adapter  = new ArrayAdapter<>(ViewUsuariosActivity.this, simple_list_item_1, list);
 
-					ViewNinerasActivity.this.listview.setAdapter(adapter);
-					ViewNinerasActivity.this.listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+					ViewUsuariosActivity.this.listview.setAdapter(adapter);
+					ViewUsuariosActivity.this.listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 						@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
 						@Override
@@ -115,13 +112,13 @@ public class ViewNinerasActivity extends AppCompatActivity {
 									.withEndAction(new Runnable() {
 										@Override
 										public void run() {
-											Intent intent = new Intent(ViewNinerasActivity.this, InfoNineraActivity.class);
+											Intent intent = new Intent(ViewUsuariosActivity.this, InfoUsuarioActivity.class);
 											intent.putExtra("Nombre", item);
-											intent.putExtra("ID", ViewNinerasActivity.this.babysister[position]);
-											intent.putExtra("Domicilio", dataSnapshot.child(ViewNinerasActivity.this.babysister[position]).child("DatosGenerales").child("Domicilio").getValue().toString());
-											intent.putExtra("FechaNacimiento", dataSnapshot.child(ViewNinerasActivity.this.babysister[position]).child("DatosGenerales").child("FechaNacimiento").getValue().toString());
-											intent.putExtra("NumeroCelular", dataSnapshot.child(ViewNinerasActivity.this.babysister[position]).child("DatosGenerales").child("NumeroCelular").getValue().toString());
-											intent.putExtra("Sexo", dataSnapshot.child(ViewNinerasActivity.this.babysister[position]).child("DatosGenerales").child("Sexo").getValue().toString());
+											intent.putExtra("ID", ViewUsuariosActivity.this.Users[position]);
+											intent.putExtra("Domicilio", dataSnapshot.child(ViewUsuariosActivity.this.Users[position]).child("DatosGenerales").child("Domicilio").getValue().toString());
+											intent.putExtra("FechaNacimiento", dataSnapshot.child(ViewUsuariosActivity.this.Users[position]).child("DatosGenerales").child("FechaNacimiento").getValue().toString());
+											intent.putExtra("NumeroCelular", dataSnapshot.child(ViewUsuariosActivity.this.Users[position]).child("DatosGenerales").child("NumeroCelular").getValue().toString());
+											intent.putExtra("Sexo", dataSnapshot.child(ViewUsuariosActivity.this.Users[position]).child("DatosGenerales").child("Sexo").getValue().toString());
 											startActivityForResult(intent, 0);
 										}
 									});
@@ -133,11 +130,11 @@ public class ViewNinerasActivity extends AppCompatActivity {
 
 			@Override
 			public void onCancelled(DatabaseError databaseError) {
-				Toast.makeText(ViewNinerasActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+				Toast.makeText(ViewUsuariosActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
 			}
 		});
 	}
-
+	
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -163,4 +160,5 @@ public class ViewNinerasActivity extends AppCompatActivity {
 			auth.removeAuthStateListener(authStateListener);
 		}
 	}
+
 }
