@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="30sp"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nombre"
+        android:textSize="15sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginBottom="5sp"
+        style="@style/Base.TextAppearance.AppCompat.Menu"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/nombre"
+        android:textSize="15sp"
+        style="@style/Base.TextAppearance.Widget.AppCompat.Toolbar.Title"
+        android:layout_marginStart="30sp"
+        android:layout_marginLeft="30sp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/direccion"
+        android:textSize="15sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginBottom="5sp"
+        style="@style/Base.TextAppearance.AppCompat.Menu"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/direccion"
+        android:textSize="15sp"
+        style="@style/Base.TextAppearance.Widget.AppCompat.Toolbar.Title"
+        android:layout_marginStart="30sp"
+        android:layout_marginLeft="30sp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fecha_nac"
+        android:textSize="15sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginBottom="5sp"
+        style="@style/Base.TextAppearance.AppCompat.Menu"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fecha_nacimiento"
+        android:textSize="15sp"
+        style="@style/Base.TextAppearance.Widget.AppCompat.Toolbar.Title"
+        android:layout_marginStart="30sp"
+        android:layout_marginLeft="30sp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/num_celular"
+        android:textSize="15sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginBottom="5sp"
+        style="@style/Base.TextAppearance.AppCompat.Menu"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/numero_celular"
+        android:textSize="15sp"
+        style="@style/Base.TextAppearance.Widget.AppCompat.Toolbar.Title"
+        android:layout_marginStart="30sp"
+        android:layout_marginLeft="30sp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sexo"
+        android:textSize="15sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginBottom="5sp"
+        style="@style/Base.TextAppearance.AppCompat.Menu"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sexo"
+        android:textSize="15sp"
+        style="@style/Base.TextAppearance.Widget.AppCompat.Toolbar.Title"
+        android:layout_marginStart="30sp"
+        android:layout_marginLeft="30sp"
+        />
+</LinearLayout>

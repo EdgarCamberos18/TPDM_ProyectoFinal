@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,7 +24,9 @@
         <activity android:name=".SignUpActivity" />
         <activity android:name=".AdminActivity" />
         <activity android:name=".BabySisterActivity" />
-        <activity android:name=".ClienteActivity"></activity>
+        <activity android:name=".ClienteActivity" />
+        <activity android:name=".ViewNinerasActivity" />
+        <activity android:name=".InfoNineraActivity"></activity>
     </application>
 
 </manifest>

@@ -16,4 +16,11 @@
     <string name="registrar_datos">Registrar Datos</string>
     <string name="email">E-mail</string>
     <string name="vPassword">Verificar Password</string>
+    <string name="ver_nineras">Ver Niñeras</string>
+    <string name="ver_usuarios">Ver Usuarios</string>
+    <string name="num_celular">Número de Celular</string>
+    <string name="sexo">Sexo</string>
+    <string name="status">Status</string>
+    <string name="guardar">Guardar</string>
+    <string name="eliminar">Eliminar</string>
 </resources>
